@@ -147,8 +147,8 @@ class ObjFollower {
 						// should circumnavigate my teammate in order to get near the enemy (not easy)
 						var newPos = {...this};
 
-						// var dir = new Vector(nearest.obj.x-this.x, nearest.obj.y-this.y);
-						var dir = new Vector(Math.random(), Math.random());
+						var dir = new Vector(nearest.obj.x-this.x, nearest.obj.y-this.y);
+						// var dir = new Vector(Math.random(), Math.random());
 						dir.norm();
 						newPos.x -= dir.x*this.velocity;
 						newPos.y -= dir.y*this.velocity;
@@ -162,17 +162,20 @@ class ObjFollower {
 								this.x = newPos.x;
 								this.y = newPos.y;
 						}
-						// while (objs.filter(obj2=> overlap(newPos, obj2)).length!==0){
+						else{
+						var iter=0
+						while (objs.filter(obj2=> overlap(newPos, obj2)).length!==0 && iter<=100){
 						// 	console.log("New pos");
-						// 	var dir = new Vector(Math.random(), Math.random());
-						// 	dir.norm();
-						// 	newPos.x -= dir.x*this.velocity;
-						// 	newPos.y -= dir.y*this.velocity;
+						var dir = new Vector(Math.random(), Math.random());
+						dir.norm();
+						newPos.x = this.x + dir.x*this.velocity;
+						newPos.y = this.y + dir.y*this.velocity;
 						// 	// newPos.x += dir.y*this.velocity;
 						// 	// newPos.y += -dir.x*this.velocity;
-						// }
-						// this.x = newPos.x;
-						// this.y = newPos.y;
+						}
+					   console.log("moved");
+						this.x = newPos.x;
+						this.y = newPos.y;
 					}
 					return;
 				}
